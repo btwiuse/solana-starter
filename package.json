@@ -1,10 +1,10 @@
 {
-  "name": "helloworld",
+  "name": "solana-starter",
   "version": "0.0.1",
-  "description": "",
+  "description": "solana program starter",
   "repository": {
     "type": "git",
-    "url": "https://github.com/solana-labs/example-helloworld"
+    "url": "https://github.com/btwiuse/solana-starter"
   },
   "keywords": [],
   "author": "",
@@ -16,8 +16,8 @@
     "lint:fix": "eslint --ext .ts client/* --fix && prettier --write \"client/**/*.ts\"",
     "build": "cargo build-bpf --manifest-path=./program/Cargo.toml --bpf-out-dir=dist/program",
     "clean": "cargo clean --manifest-path=./program/Cargo.toml && rm -rf ./dist",
-    "deploy": "solana program deploy dist/program/helloworld.so",
-    "rotate-key": "solana-keygen new -o ./dist/program/helloworld-keypair.json --force",
+    "deploy": "solana program deploy dist/program/hello.so",
+    "rotate-key": "solana-keygen new -o ./dist/program/hello-keypair.json --force",
     "test": "cargo test-bpf --manifest-path=./program/Cargo.toml",
     "pretty": "prettier --write '{,./**/}*.ts'"
   },
