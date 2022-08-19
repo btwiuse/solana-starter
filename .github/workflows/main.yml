@@ -40,12 +40,9 @@ jobs:
           solana-keygen new --no-bip39-passphrase
           solana-test-validator --quiet &
           npm run lint
-          npm run build:program-rust
-          npm run test:program-rust
-          cargo test-bpf --manifest-path=./src/program-rust/Cargo.toml
+          npm run build
+          npm run test
+          cargo test-bpf --manifest-path=./program/Cargo.toml
           solana config set --url http://127.0.0.1:8899
-          solana program deploy dist/program/helloworld.so
-          npm run start
-          npm run build:program-c
           solana program deploy dist/program/helloworld.so
           npm run start

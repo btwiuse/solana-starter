@@ -3,6 +3,8 @@
 /.cargo
 /dist
 .env
-src/client/util/store
+client/util/store
 test-ledger/
 .DS_Store
+package-lock.json
+yarn.lock
