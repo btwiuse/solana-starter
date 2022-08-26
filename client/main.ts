@@ -7,6 +7,9 @@ import {
   establishPayer,
   checkProgram,
   sayHello,
+  doNothing,
+  logMessage,
+  logMemo,
   reportGreetings,
 } from './hello';
 
@@ -24,6 +27,15 @@ async function main() {
 
   // Say hello to an account
   await sayHello();
+
+  // do nothing
+  await doNothing();
+
+  // log message
+  await logMessage();
+
+  // log message
+  await logMemo();
 
   // Find out how many times that account has been greeted
   await reportGreetings();

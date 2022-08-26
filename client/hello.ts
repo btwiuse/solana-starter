@@ -201,9 +201,68 @@ export async function checkProgram(): Promise<void> {
 export async function sayHello(): Promise<void> {
   console.log('Saying hello to', greetedPubkey.toBase58());
   const instruction = new TransactionInstruction({
-    keys: [{pubkey: greetedPubkey, isSigner: false, isWritable: true}],
     programId,
-    data: Buffer.alloc(0), // All instructions are hellos
+    keys: [{pubkey: greetedPubkey, isSigner: false, isWritable: true}],
+    data: Buffer.from([1]), // incr
+  });
+  const tx = await sendAndConfirmTransaction(
+    connection,
+    new Transaction().add(instruction),
+    [payer],
+  );
+  console.log(`Solscan: https://solscan.io/tx/${tx}?cluster=devnet`);
+  console.log(`Explorer: https://explorer.solana.com/tx/${tx}?cluster=devnet`);
+}
+
+/**
+ * Do nothing
+ */
+export async function doNothing(): Promise<void> {
+  console.log('Doing nothing');
+  const instruction = new TransactionInstruction({
+    programId,
+    keys: [],
+    data: Buffer.from([0]), // nop
+  });
+  const tx = await sendAndConfirmTransaction(
+    connection,
+    new Transaction().add(instruction),
+    [payer],
+  );
+  console.log(`Solscan: https://solscan.io/tx/${tx}?cluster=devnet`);
+  console.log(`Explorer: https://explorer.solana.com/tx/${tx}?cluster=devnet`);
+}
+
+/**
+ * Log memo
+ */
+export async function logMemo(): Promise<void> {
+  console.log('logMemo');
+  const memoProg = new PublicKey("MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr");
+  const instruction = new TransactionInstruction({
+    programId,
+    keys: [{pubkey: memoProg, isSigner: false, isWritable: false}],
+    // keys: [{pubkey: greetedPubkey, isSigner: false, isWritable: true}],
+    data: Buffer.from([3, 97]), // log
+  });
+  const tx = await sendAndConfirmTransaction(
+    connection,
+    new Transaction().add(instruction),
+    [payer],
+  );
+  console.log(`Solscan: https://solscan.io/tx/${tx}?cluster=devnet`);
+  console.log(`Explorer: https://explorer.solana.com/tx/${tx}?cluster=devnet`);
+}
+
+/**
+ * Log message
+ */
+export async function logMessage(): Promise<void> {
+  console.log('logMessage to');
+  const instruction = new TransactionInstruction({
+    programId,
+    keys: [],
+    data: Buffer.from([2, 1,2,3,4]), // log
   });
   const tx = await sendAndConfirmTransaction(
     connection,
