@@ -205,11 +205,13 @@ export async function sayHello(): Promise<void> {
     programId,
     data: Buffer.alloc(0), // All instructions are hellos
   });
-  await sendAndConfirmTransaction(
+  const tx = await sendAndConfirmTransaction(
     connection,
     new Transaction().add(instruction),
     [payer],
   );
+  console.log(`Solscan: https://solscan.io/tx/${tx}?cluster=devnet`);
+  console.log(`Explorer: https://explorer.solana.com/tx/${tx}?cluster=devnet`);
 }
 
 /**
